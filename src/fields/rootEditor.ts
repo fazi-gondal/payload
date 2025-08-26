@@ -1,14 +1,13 @@
- // src/fields/rootEditor.ts
+// src/fields/rootEditor.ts
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import {
   AlignFeature,
   BlockquoteFeature,
   BoldFeature,
-  CodeBlockFeature,
+  CodeFeature,
   HeadingFeature,
   HorizontalRuleFeature,
   IndentFeature,
-  InlineCodeFeature,
   ItalicFeature,
   LinkFeature,
   OrderedListFeature,
@@ -32,8 +31,7 @@ export const rootEditor = lexicalEditor({
     HeadingFeature({
       enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     }),
-    InlineCodeFeature(),
-    CodeBlockFeature({
+    CodeFeature({
       supportedLanguages: {
         js: 'JavaScript',
         ts: 'TypeScript',
