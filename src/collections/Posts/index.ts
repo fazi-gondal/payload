@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
+  lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
 import { authenticated } from '../../access/authenticated'
@@ -81,14 +82,13 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'content',
               type: 'richText',
-              editor: {
-                ...rootLexical,
+              editor: lexicalEditor({
                 features: ({ rootFeatures }) => [
                   ...rootLexical.features({ rootFeatures }),
                   FixedToolbarFeature(),
                   InlineToolbarFeature(),
                 ],
-              },
+              }),
               label: false,
               required: true,
             },
@@ -223,4 +223,4 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     maxPerDoc: 50,
   },
-}
+              }
