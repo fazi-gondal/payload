@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload'
 
+import {
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+} from '@payloadcms/richtext-lexical'
+
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Banner } from '../../blocks/Banner/config'
-import { Code } from '../../blocks/Code/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -17,7 +19,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { rootLexical, regenerateExcerpt } from '../../fields/rootLexical'
+import { rootLexical } from '../../fields/rootLexical'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -79,7 +81,14 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'content',
               type: 'richText',
-              editor: rootLexical,
+              editor: {
+                ...rootLexical,
+                features: ({ rootFeatures }) => [
+                  ...rootLexical.features({ rootFeatures }),
+                  FixedToolbarFeature(),
+                  InlineToolbarFeature(),
+                ],
+              },
               label: false,
               required: true,
             },
@@ -214,4 +223,4 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     maxPerDoc: 50,
   },
-        }
+}
