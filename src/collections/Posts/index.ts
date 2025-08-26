@@ -17,7 +17,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { rootLexical } from './fields/rootLexical'
+import { rootLexical, regenerateExcerpt } from '../../fields/rootLexical'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -88,6 +88,9 @@ export const Posts: CollectionConfig<'posts'> = {
               type: 'textarea',
               admin: {
                 description: 'This will be auto-generated from content if left empty',
+              },
+              hooks: {
+                beforeChange: [regenerateExcerpt],
               },
             },
           ],
