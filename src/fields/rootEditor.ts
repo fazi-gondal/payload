@@ -1,26 +1,31 @@
 // src/fields/rootEditor.ts
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+
+// NEW path for the *actual* features
 import {
-  AlignFeature,
-  BlockquoteFeature,
   BoldFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  IndentFeature,
   ItalicFeature,
-  LinkFeature,
-  OrderedListFeature,
+  UnderlineFeature,
   StrikethroughFeature,
   SubscriptFeature,
   SuperscriptFeature,
-  UnderlineFeature,
-  UnorderedListFeature,
+  HeadingFeature,
+  LinkFeature,
   UploadFeature,
-} from '@payloadcms/richtext-lexical';
+  BlockquoteFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
+  IndentFeature,
+  AlignFeature,
+  HorizontalRuleFeature,
+  InlineCodeFeature,
+  CodeBlockFeature,
+  TextColorFeature,
+  BackgroundColorFeature,
+} from '@payloadcms/richtext-lexical/features'; // <-- NOTE the /features path
 
 export const rootEditor = lexicalEditor({
-  features: ({ defaultFeatures }) => [
-    ...defaultFeatures, // includes inline-code & code-block
+  features: [
     BoldFeature(),
     ItalicFeature(),
     UnderlineFeature(),
@@ -30,11 +35,20 @@ export const rootEditor = lexicalEditor({
     HeadingFeature({
       enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     }),
+    InlineCodeFeature(),
+    CodeBlockFeature({
+      supportedLanguages: {
+        js: 'JavaScript',
+        ts: 'TypeScript',
+        html: 'HTML',
+        css: 'CSS',
+        bash: 'Bash',
+        json: 'JSON',
+      },
+    }),
     LinkFeature({
       enabledCollections: ['posts', 'pages'],
-      fields: [
-        { name: 'rel', type: 'select', options: ['nofollow', 'noopener'] },
-      ],
+      fields: [{ name: 'rel', type: 'select', options: ['nofollow', 'noopener'] }],
     }),
     UploadFeature({
       collections: {
@@ -49,5 +63,7 @@ export const rootEditor = lexicalEditor({
     IndentFeature(),
     AlignFeature(),
     HorizontalRuleFeature(),
+    TextColorFeature(),
+    BackgroundColorFeature(),
   ],
 });
