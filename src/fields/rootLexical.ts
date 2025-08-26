@@ -15,13 +15,11 @@ import {
   LinkFeature,
   OrderedListFeature,
   ParagraphFeature,
-  RedoFeature,
   RelationshipFeature,
   StrikethroughFeature,
   SubscriptFeature,
   SuperscriptFeature,
   UnderlineFeature,
-  UndoFeature,
   UnorderedListFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
@@ -55,7 +53,7 @@ const regenerateExcerpt: FieldHook = ({ data, value }) => {
   return value
 }
 
-export const rootLexical = lexicalEditor({
+const rootLexical = lexicalEditor({
   features: ({ defaultFeatures, rootFeatures }) => [
     ...rootFeatures,
     // Text Formatting Features
@@ -320,12 +318,12 @@ export const rootLexical = lexicalEditor({
         },
       ],
     }),
-
-    // History Features
-    UndoFeature(),
-    RedoFeature(),
   ],
 })
 
 // Export the excerpt regeneration hook for use in collections
 export { regenerateExcerpt }
+
+// Default export for the lexical editor
+export { rootLexical }
+export default rootLexical
