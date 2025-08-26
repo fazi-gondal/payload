@@ -20,7 +20,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { rootLexicalFeatures } from '../../fields/rootLexical'
+import { rootLexical } from '../../fields/rootLexical'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -82,13 +82,7 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'content',
               type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => [
-                  ...rootLexicalFeatures({ rootFeatures }),
-                  FixedToolbarFeature(),
-                  InlineToolbarFeature(),
-                ],
-              }),
+              editor: rootLexical,
               label: false,
               required: true,
             },
