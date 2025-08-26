@@ -195,9 +195,6 @@ const rootLexical = lexicalEditor({
               label: 'Code',
               type: 'textarea',
               required: true,
-              admin: {
-                language: 'javascript', // This will provide syntax highlighting in the admin
-              },
             },
             {
               name: 'filename',
