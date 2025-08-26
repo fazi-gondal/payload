@@ -83,16 +83,6 @@ export const Posts: CollectionConfig<'posts'> = {
               label: false,
               required: true,
             },
-            {
-              name: 'excerpt',
-              type: 'textarea',
-              admin: {
-                description: 'This will be auto-generated from content if left empty',
-              },
-              hooks: {
-                beforeChange: [regenerateExcerpt],
-              },
-            },
           ],
           label: 'Content',
         },
@@ -224,4 +214,4 @@ export const Posts: CollectionConfig<'posts'> = {
     },
     maxPerDoc: 50,
   },
-}
+        }
