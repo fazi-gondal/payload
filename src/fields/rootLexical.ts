@@ -6,10 +6,12 @@ import {
   BlocksFeature,
   BoldFeature,
   ChecklistFeature,
+  FixedToolbarFeature,
   HeadingFeature,
   HorizontalRuleFeature,
-  IndentFeature,
   InlineCodeFeature,
+  InlineToolbarFeature,
+  IndentFeature,
   ItalicFeature,
   lexicalEditor,
   LinkFeature,
@@ -320,6 +322,9 @@ const rootLexical = lexicalEditor({
 
 // Export the excerpt regeneration hook for use in collections
 export { regenerateExcerpt }
+
+// Export the features function for reuse
+export { rootLexicalFeatures }
 
 // Default export for the lexical editor
 export { rootLexical }
