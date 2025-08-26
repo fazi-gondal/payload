@@ -4,7 +4,6 @@ import {
   AlignFeature,
   BlockquoteFeature,
   BoldFeature,
-  CodeFeature,
   HeadingFeature,
   HorizontalRuleFeature,
   IndentFeature,
@@ -18,38 +17,22 @@ import {
   UnderlineFeature,
   UnorderedListFeature,
   UploadFeature,
+  // ❌ DO NOT import CodeFeature or CodeBlockFeature here
 } from '@payloadcms/richtext-lexical';
 
 export const rootEditor = lexicalEditor({
-  features: () => [
+  features: ({ defaultFeatures }) => [
+    ...defaultFeatures, // this already contains inline-code & code-block
     BoldFeature(),
     ItalicFeature(),
     UnderlineFeature(),
     StrikethroughFeature(),
     SubscriptFeature(),
     SuperscriptFeature(),
-    HeadingFeature({
-      enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    }),
-    CodeFeature({
-      supportedLanguages: {
-        js: 'JavaScript',
-        ts: 'TypeScript',
-        html: 'HTML',
-        css: 'CSS',
-        bash: 'Bash',
-        json: 'JSON',
-      },
-    }),
+    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }),
     LinkFeature({
       enabledCollections: ['posts', 'pages'],
-      fields: [
-        {
-          name: 'rel',
-          type: 'select',
-          options: ['nofollow', 'noopener'],
-        },
-      ],
+      fields: [{ name: 'rel', type: 'select', options: ['nofollow', 'noopener'] }],
     }),
     UploadFeature({
       collections: {
@@ -67,14 +50,8 @@ export const rootEditor = lexicalEditor({
     TextColorFeature({
       colorPicker: {
         presets: [
-          '#000000',
-          '#ffffff',
-          '#ff0000',
-          '#ffff00',
-          '#00ff00',
-          '#0000ff',
-          '#ff00ff',
-          '#00ffff',
+          '#000000', '#ffffff', '#ff0000', '#ffff00', '#00ff00',
+          '#0000ff', '#ff00ff', '#00ffff',
         ],
       },
     }),
